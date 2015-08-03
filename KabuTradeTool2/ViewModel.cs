@@ -39,6 +39,12 @@ namespace KabuTradeTool2
             set { _title = value; OnPropertyChanged("Title"); }
         }
 
+        public ObservableCollection<StockEntity> StockEntityList
+        {
+            get { return _stockList; }
+            set { _stockList = value; OnPropertyChanged("StockEntityList"); }
+        }
+
         public DownloadCommand DownloadCommand
         {
             get
@@ -75,7 +81,7 @@ namespace KabuTradeTool2
 
             rows.Skip(2).ToList().ForEach(row => list.Add(converter(row)));
 
-            // StockEntityList = new ObservableCollection<StockEntity>(list);
+            StockEntityList = new ObservableCollection<StockEntity>(list);
         }
     }
 }

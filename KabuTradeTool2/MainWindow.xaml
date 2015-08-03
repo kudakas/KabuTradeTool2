@@ -1,8 +1,34 @@
 ﻿<Window x:Class="KabuTradeTool2.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:KabuTradeTool2"
         Title="MainWindow" Height="350" Width="525">
+  <Window.DataContext>
+    <vm:ViewModel x:Name="viewModel"/>
+  </Window.DataContext>
+  <Window.Resources>
+    <CollectionViewSource Source="{Binding StockEntityList}" x:Key="proxy"/>
+  </Window.Resources>
     <Grid>
-        
-    </Grid>
+      <Grid Background="Silver" Height="50" VerticalAlignment="Top">
+          <Label Content="{Binding Path=Title}" HorizontalAlignment="Left" Margin="50,10,10,0"/>
+          <Button Command="{Binding DownloadCommand}" Content="DownLoad" HorizontalAlignment="Right" Margin="0,10,30,10" Width="75"/>
+      </Grid>
+      <ListView x:Name="lv" Margin="0,50,0,0" ItemsSource="{Binding Source={StaticResource proxy}}">
+        <ListView.View>
+          <GridView>
+            <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}"/>
+            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+            <GridViewColumn Header="Market" DisplayMemberBinding="{Binding Market}"/>
+            <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Category}"/>
+            <GridViewColumn Header="Opening" DisplayMemberBinding="{Binding Opening}"/>
+            <GridViewColumn Header="High" DisplayMemberBinding="{Binding High}"/>
+            <GridViewColumn Header="Low" DisplayMemberBinding="{Binding Low}"/>
+            <GridViewColumn Header="Closing" DisplayMemberBinding="{Binding Closing}"/>
+            <GridViewColumn Header="Volume" DisplayMemberBinding="{Binding Volume}"/>
+            <GridViewColumn Header="Turnover" DisplayMemberBinding="{Binding Turnover}"/>
+          </GridView>
+        </ListView.View>
+      </ListView>
+            </Grid>
 </Window>
